@@ -33,13 +33,17 @@ const App = () => {
 
 // We will use a hardcoded portal root to make things easier. You have to put a
 // dom node in here though, I'm not doing that for you.
-const portalRoot = null;
+const portalRoot = document.querySelector('#portal-root')!;
 
 const Portal: React.FC = ({ children }) => {
+  //
+  const [targetElem, setTargetElem] = useState(() => (
+    document.createElement('div')
+  ));
   // This should do portal things
   return (
     <>
-      children
+      {children}
     </>
   );
 };
@@ -47,8 +51,10 @@ const Portal: React.FC = ({ children }) => {
 // This should do modal things (using Portal) and apply styles to the containing div(s)
 const Modal: React.FC = ({ children }) => {
   return (
-    <div>
-      {children}
+    <div className={styles.modalContainer} >
+      <div className={styles.modal} >
+        {children}
+      </div>
     </div>
   )
 };
